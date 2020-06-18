@@ -1,0 +1,78 @@
+@import 'src/styles/core/variables';
+
+:host {
+  max-width: 100%;
+}
+
+.services-list__nav > div {
+  display: flex;
+  justify-content: space-between;
+  max-width: 100%;
+  overflow: auto;
+  margin-bottom: 12px;
+}
+
+.services-list__option {
+  padding: 1px 5px;
+  margin-right: 5px;
+  border-radius: $tiny-radius;
+  cursor: pointer;
+
+  &.active {
+    background: $gray-background;  
+  }
+}
+
+.services-list__list {
+  margin-top: 18px;
+}
+
+.services-list__item {
+  display: flex;
+  justify-content: space-between;
+  padding: 1px 8px;
+  marging: 2px;
+  border-radius: $small-radius;
+  cursor: pointer;
+
+  .services-list__add-to-fav {
+    opacity: 0;
+  }
+
+  &:hover {
+    background: $gray-background;
+    .services-list__add-to-fav {
+      opacity: 1;
+    }
+  }
+}
+
+.services-list__points, .services-list__cashback {
+  app-icon {
+    margin-left: 8px;
+  }
+}
+
+.services-list__name {
+  display: flex;
+  align-items: center;
+}
+
+.services-list__favourite {
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.services-list__details {
+  display: flex;
+  align-items: center;
+}
+
+.services-list__details > * {
+  display: flex;
+  width: 120px;
+  align-items: center;
+  padding-left: 20px;
+}

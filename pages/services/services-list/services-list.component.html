@@ -1,0 +1,51 @@
+<div class="shops-list">
+  <div class="shops-list__nav">
+    <div>
+      <span *ngFor="let option of options" 
+      (click)="setFilter(option)"
+      [class.active]="isActive(option)"
+      class="shops-list__option">
+        {{ option.name }}
+      </span>
+    </div>
+    <div>
+      <span *ngFor="let option of alphabet_ru" 
+      (click)="setFilter(option)"
+      [class.active]="isActive(option)"
+      class="shops-list__option">
+        {{ option.name }}
+      </span>
+    </div>
+  </div>
+  <div class="shops-list__list">
+    <div 
+    *ngFor="let shop of shops"
+    routerLink="/shop/{{ shop.id }}"
+    class="shops-list__item">
+      <div class="shops-list__name">
+        {{ shop.name }}
+      </div>
+      <div class="shops-list__details">
+        <div class="shops-list__points">
+          до {{ shop.max_pv }} <app-icon>points</app-icon>
+        </div>
+        <div class="shops-list__cashback">
+          до {{ shop.max_cashback }} <app-icon>rub_green</app-icon>
+        </div>
+        <div class="shops-list__favourite">
+          <app-icon 
+          *ngIf="shop.inFavourite"
+          (click)="removeFromFavourite(shop); $event.stopPropagation()">
+            heart_pink
+          </app-icon>
+          <app-icon 
+          *ngIf="!shop.inFavourite"
+          (click)="addToFavourite(shop); $event.stopPropagation()"
+          class="shops-list__add-to-fav">
+            favorite
+          </app-icon>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

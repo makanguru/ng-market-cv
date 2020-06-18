@@ -1,0 +1,55 @@
+@import 'src/styles/core/variables';
+@import 'src/styles/core/mixins';
+.section{
+  background: #F5F5F5;
+}
+.link_tabs {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    &:hover,:focus,:visited,:active{
+      text-decoration: none;
+      outline: none;
+    }
+        border-bottom: 3px solid $main-gradient;
+        text-transform: uppercase;
+        .link_tab {
+            display: flex;
+          position: relative;
+          margin: 0px 16px;
+          &:hover,:focus,:visited,:active{
+            text-decoration: none;
+            outline: none;
+          }
+          &.active {
+            .link-tab-title {
+              @include main-gradient-text;
+              border-color: $main-gradient;
+            }
+  
+            .tabs__underline {
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              display: block;
+              height: 3px;
+              width: 100%;
+              background: $main-gradient;
+            }
+          }
+  
+          .link-tab-title {
+            display: flex;
+            color: #333333;
+            font-size: 16px;
+            font-weight: 500;
+            height: 100%;
+            align-items: center;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            padding: 22px 0px;
+            margin-bottom: -1px;
+           
+          }
+        }
+    }

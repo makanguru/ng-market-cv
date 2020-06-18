@@ -1,0 +1,82 @@
+<div class="container">
+<app-catalog #catalog
+(reset)="onReset()"
+(pageQueryChange)="onPageQueryChange($event)"
+[(tags)]="tags"
+[page]="shopsQuery.page"
+[perPage]="shopsQuery['per-page']"
+[title]="category?.name || 'Все категории'"
+[total]="shops?.pagination.totalCount"
+[isLoading]="isLoading"
+[perPageSet]="perPageSet">
+  
+  <aside>
+    <app-categories-filter #categoryFilter></app-categories-filter>
+    <app-country-filter #countryFilter 
+    [(country)]="selectedCountry"
+    [(city)]="selectedCity"></app-country-filter>
+    <app-catalog-filter-actions (apply)="onApply()" (reset)="onReset()"></app-catalog-filter-actions>
+  </aside>
+
+  <nav>
+    <app-select *ngIf="false" [(value)]="sortBy">
+      <app-option value="name">
+        По названию 0-9, А-Я, A-Z
+      </app-option>
+      <app-option value="points">
+        <span class="shops__sort-option">
+          <app-icon>points</app-icon> По количеству баллов
+        </span>
+      </app-option>
+      <app-option value="cashback">
+        <span class="shops__sort-option">
+          <app-icon>rub_green</app-icon> По количеству кэшбэка
+        </span>
+      </app-option>
+    </app-select>
+    <div class="shops__search">
+      <input #searchInput 
+      (keydown.enter)="onSearch()" 
+      type="text" placeholder="Название услуги">
+      <app-button 
+      (click)="onSearch()"
+      [style]="{'height':'inherit','border-radius':'inherit','border':'inherit','width': 'inherit', 'display': 'flex', 'justify-content': 'center'}">
+        <app-icon>search</app-icon>
+      </app-button>
+    </div>
+    <div class="shops__views">
+      <app-button 
+      (click)="onSetView('list')"
+      [equal]="true"
+      [class.active]="view === 'list'" 
+      [style]="{'display': 'flex', 'height':'inherit','width': 'inherit'}">
+        <app-icon>listview</app-icon>
+      </app-button>
+      <app-button 
+      (click)="onSetView('grid')"
+      [equal]="true" 
+      [class.active]="view === 'grid'"
+      [style]="{'display': 'flex', 'height':'inherit','width': 'inherit'}">
+        <app-icon>gridview</app-icon>
+      </app-button>
+    </div>
+  </nav>
+  
+  <main>
+    <div class="shops_row row" *ngIf="view === 'grid'" >
+      <div 
+      *ngFor="let shop of shops?.data" 
+      class="col-12 col-sm-6 col-lg-4 shops__card">
+        <app-shop-card [shop]="shop"></app-shop-card>
+      </div>
+    </div>
+    <app-services-list 
+    *ngIf="view === 'list'"
+    (filterChange)="onSearchByFirstLetter($event.name)"
+    [shops]="shops?.data">
+      List
+    </app-services-list>
+  </main>
+
+</app-catalog>
+</div>
